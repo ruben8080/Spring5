@@ -1,0 +1,17 @@
+aca voy a mostrar todos los comandos *************
+en la consola escribir  *sudo gedit ~/.bashrc
+alias actualizar='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'
+alias xammp='cd /opt/lampp/htdocs'
+alias smartgit='cd /opt/smartgit/bin && sudo sh smartgit.sh'
+alias ='sudo gedit ~/.bashrc'
+alias angular5='cd /angular5'
+
+editar_alias='sudo gedit ~/.bashrc'
+detener el servicio mysql 
+sudo service mysql stop
+
+eliminar mysql
+sudo apt-get remove mysql-*
+
+
+
