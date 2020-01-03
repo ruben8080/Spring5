@@ -25,8 +25,6 @@ public class ClienteDaoImpl implements IClienteDao {
 
 	//metodos que son solo consultas a la DB
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true) // lo colocamos esto por que es una consulta de solo lectura por ser consulta
-	// cuando es un editar un insert ahi podemos omitir el readOnly = true
 	@Override
 	public List<Cliente> findAll() {
 		return em.createQuery("from Cliente").getResultList();
@@ -34,7 +32,6 @@ public class ClienteDaoImpl implements IClienteDao {
 
 	// editar nuevo cliente
 	@Override
-	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
 	}
@@ -43,7 +40,6 @@ public class ClienteDaoImpl implements IClienteDao {
 
 	// guardar nuevo cliente
 	@Override
-	@Transactional
 	public void save(Cliente cliente) {
 		if (cliente.getId() != null && cliente.getId() > 0) {
 			System.out.println("llego a editar");
@@ -55,7 +51,6 @@ public class ClienteDaoImpl implements IClienteDao {
 
 	// eliminar cliente
 	@Override
-	@Transactional
 	public void delete(Long id) {
 		// primero obtenemos el cliente a eliminar
 		em.remove(findOne(id));

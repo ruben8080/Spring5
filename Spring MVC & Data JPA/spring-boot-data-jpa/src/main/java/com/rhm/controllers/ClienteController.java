@@ -15,6 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.rhm.models.dao.IClienteDao;
 import com.rhm.models.entity.Cliente;
+import com.rhm.models.service.IClienteService;
 
 @Controller
 //indicamos que se va a guardar en los atributos de la session el objeto cliente mapeado al fomulario cada vez que se invoca el crear o editar 
@@ -25,12 +26,14 @@ public class ClienteController {
 
 
 	@Autowired//inyectamos  la interface
-	public IClienteDao clienteDao;
+//	public IClienteDao clienteDao;
+	public IClienteService clienteService;
+	
 	
 	@RequestMapping(value = "/listar", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Lista de clientes");
-		model.addAttribute("clientes", clienteDao.findAll());
+		model.addAttribute("clientes", clienteService.findAll());
 		return "listar";
 	}
 	//creamos el cliente
@@ -52,7 +55,7 @@ public class ClienteController {
 			model.addAttribute("titulo", "Crear Cliente");
 			return "form";
 		}
-		clienteDao.save(cliente);
+		clienteService.save(cliente);
 		status.setComplete();//elimina el objeto cliente de la session y termiana el proceso 
 		return "redirect:listar";
 	}
@@ -62,7 +65,7 @@ public class ClienteController {
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model){
 		Cliente cliente = null;
 		if (id > 0) {
-			cliente = clienteDao.findOne(id);
+			cliente = clienteService.findOne(id);
 		} else {
 			return "redirect:/listar";
 		}
@@ -75,7 +78,7 @@ public class ClienteController {
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id){
 		if (id > 0) {
-			clienteDao.delete(id);
+			clienteService.delete(id);
 		} 
 		return "redirect:/listar";
 	} 
@@ -84,7 +87,7 @@ public class ClienteController {
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model){
 			Cliente cliente = null;
 			if (id > 0) {
-				cliente = clienteDao.findOne(id);
+				cliente = clienteService.findOne(id);
 			} 
 			model.put("cliente", cliente);
 			model.put("titulo","Detalle Cliente");
