@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{../css/style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Spring MVC & Data JPA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/listar}">Clientes<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/form}">ABM Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown03">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0">
+                <input class="form-control" type="text" placeholder="Search">
+            </form>
+        </div>
+    </nav>
+
+    <br>
+    <div class="container">
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 text-center" th:text="${titulo}"></h1>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" th:href="@{/form}">Crear Cliente</a>
+        <hr>
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>Detalle</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr th:each="c: ${clientes}">
+                    <!-- <td scope="col" th:text="${c.id}"></td> -->
+                    <td>
+                        <!-- <button type="button" class="btn btn-primary" th:href="@{/ver/} + ${c.id}" data-toggle="modal" data-target="#exampleModal">Ver</button> -->
+                        <!-- <a class="btn btn-warning btn-xs" th:href="@{/ver/} + ${c.id}" th:text="'ver'" data-toggle="modal" data-target="#exampleModal"></a> -->
+                        <a class="btn btn-success btn-xs" th:href="@{/ver/} + ${c.id}" th:text="'ver'"></a>
+                    </td>
+                    <td scope="col" th:text="${c.nombre}"></td>
+                    <td scope="col" th:text="${c.apellido}"></td>
+                    <td scope="col" th:text="${c.email}"></td>
+                    <td scope="col" th:text="${c.createAt}"></td>
+                    <td scope="col" class="text-center">
+                        <a class="btn btn-warning btn-xs" th:href="@{/form/} + ${c.id}" th:text="'editar'"></a>
+                        <a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${c.id}" th:text="'eliminar'" onclick="return confirm('Estas seguro ?');"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- <form th:object="${cliente}">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Nombre</label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Apellido</label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'form-control alert-danger'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{email}" class="form-control" th:errorclass="'form-control alert-danger'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Fecha</label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{createAt}" class="form-control" th:errorclass="'form-control alert-danger'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+                                </div>
+                            </div>
+                        </form> -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" th:src="@{../js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{../js/popper.js}"></script>
+    <script type="text/javascript" th:src="@{../js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>
