@@ -1,13 +1,10 @@
-package com.rhm.models.dao;
+package com.rhm.models.dao.impl;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
+import com.rhm.models.dao.IClienteDao;
 import com.rhm.models.entity.Cliente;
 
 //decoramos la clase con la anotacion @Repository marca a la clase como un componente spring lo marca como un tipo repositorio 
@@ -42,7 +39,6 @@ public class ClienteDaoImpl implements IClienteDao {
 	@Override
 	public void save(Cliente cliente) {
 		if (cliente.getId() != null && cliente.getId() > 0) {
-			System.out.println("llego a editar");
 			em.merge(cliente);// con merge editamos los datos existentes
 		} else {
 			em.persist(cliente);

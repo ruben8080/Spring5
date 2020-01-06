@@ -1,12 +1,12 @@
-package com.rhm.models.service;
+package com.rhm.models.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.rhm.models.dao.IClienteDao;
 import com.rhm.models.entity.Cliente;
+import com.rhm.models.service.IClienteService;
 
 @Service//una clase con la anotacion service esta basado en el patron de diseño fachada 
 //un unico punto de acceso hacia distintos DAOs o repositorios 

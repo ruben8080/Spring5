@@ -1,8 +1,6 @@
 package com.rhm.controllers;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-import com.rhm.models.dao.IClienteDao;
 import com.rhm.models.entity.Cliente;
 import com.rhm.models.service.IClienteService;
+
 
 @Controller
 //indicamos que se va a guardar en los atributos de la session el objeto cliente mapeado al fomulario cada vez que se invoca el crear o editar 
@@ -91,7 +88,7 @@ public class ClienteController {
 			} 
 			model.put("cliente", cliente);
 			model.put("titulo","Detalle Cliente");
-			return "ver";
+			return "form";
 		} 
 	
 
