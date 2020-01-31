@@ -2,6 +2,8 @@ package com.rhm.models.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.rhm.models.dao.IClienteDao;
@@ -20,7 +22,7 @@ public class ClienteServiceImpl implements IClienteService {
 	@Transactional(readOnly = true) // lo colocamos esto por que es una consulta de solo lectura por ser consulta
 	// cuando es un editar un insert ahi podemos omitir el readOnly = true
 	public List<Cliente> findAll() {
-		return clienteDao.findAll();
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
@@ -32,14 +34,20 @@ public class ClienteServiceImpl implements IClienteService {
 	@Override
 	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
-		return clienteDao.findOne(id);
+		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		clienteDao.delete(id);
+		clienteDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Cliente> findAll(Pageable pageable) {
 		
+		return clienteDao.findAll(pageable);
 	}
 
 }

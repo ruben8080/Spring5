@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title th:text="'Spring Boot: MVC + Thymeleaf + Data JPA - ' + ${titulo}"></title>
+    <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{../css/style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Spring MVC & Data JPA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/listar}">Clientes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/form}">ABM Cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown03">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" type="text" placeholder="Search">
+                </form>
+            </div>
+        </nav>
+        <!-- zona de mensajes que vienen del backend a la hora de insertar clientes  -->
+        <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+        <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+        <div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+        <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+        <!-- fin de la zona-->
+
+    </header>
+
+    <div class="container"> </div>
+
+    <footer class="container" th:fragment="footer">
+        <hr />
+        <img th:src="@{/images/spring.png}" alt="Spring logo" />
+
+        <p>
+            Power by <a href="https://projects.spring.io/spring-boot/">SpringBoot</a> y
+            <a href="http://www.thymeleaf.org">Thymeleaf</a>.
+        </p>
+        <p>
+            Este proyecto fue desarrollado en IDE Eclipse + Spring Plugins (STS Spring Tool), Ruben Mendez.<br /> &copy; Company 2020, Inc. Todos los derechos reservados. Términos de uso y privacidad.<br />
+        </p>
+        <script type="text/javascript" th:src="@{../js/jquery.js}"></script>
+        <script type="text/javascript" th:src="@{../js/popper.js}"></script>
+        <script type="text/javascript" th:src="@{../js/bootstrap.min.js}"></script>
+
+    </footer>
+
+
+
+</body>
+
+</html>

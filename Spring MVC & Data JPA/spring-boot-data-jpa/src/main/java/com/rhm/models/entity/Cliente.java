@@ -49,6 +49,8 @@ public class Cliente implements Serializable {
 	@Temporal(TemporalType.DATE) // indica el formato que se va a guardar esta fecha en java en la BD
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
+	
+	private String foto;
 
 	public Cliente() {
 	}
@@ -100,6 +102,16 @@ public class Cliente implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	
 	//hacemos un metodo que un atributo persista antes de hacer la perisistencia propiamente dicha
 //	@PrePersist
 //	public void prePersist() {
